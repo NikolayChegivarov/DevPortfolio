@@ -1,0 +1,55 @@
+# Python / Django
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.sqlite3
+*.db
+*.log
+*.pot
+*.pyc
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+.DS_Store
+.coverage
+.coverage.*
+*.mo
+*.po
+*.pot
+
+# Node / React
+node_modules/
+dist/
+dist-ssr/
+*.local
+.npm
+*.log
+.vite
+*.tsbuildinfo
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.iml
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Мои черновики
+backend/Draft.md
+

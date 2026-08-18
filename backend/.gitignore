@@ -1,0 +1,7 @@
+.venv
+.env
+/.idea/
+__pycache__/
+Draft.md
+api_apps/media/products/*
+api_apps/migrations/*
