@@ -1,17 +1,27 @@
+import ProjectList from './components/ProjectList';
+import FeedbackForm from './components/FeedbackForm';
+
 function App() {
-  return (
-    <div className="test-class min-h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-2xl">
-        <h1 className="text-4xl font-bold text-blue-600">
-          🎉 Проверка CSS!
-        </h1>
-        <p className="mt-2 text-gray-600">
-          Если фон стал красным — значит index.css загружается.
-        </p>
-      </div>
-    </div>
-  );
+    return (
+        <div className="min-h-screen bg-gray-50">
+            <header className="bg-white shadow-sm border-b border-gray-200">
+                <div className="max-w-6xl mx-auto px-4 py-6">
+                    <h1 className="text-3xl font-bold text-gray-900">
+                        Портфолио разработчика
+                    </h1>
+                    <p className="text-gray-600 mt-1">
+                        Django + React + TypeScript + Tailwind
+                    </p>
+                </div>
+            </header>
+            <main>
+                <div className="max-w-6xl mx-auto px-4 py-8">
+                    <ProjectList />
+                </div>
+                <FeedbackForm />
+            </main>
+        </div>
+    );
 }
 
 export default App;
-
