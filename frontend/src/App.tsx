@@ -22,7 +22,9 @@ function App() {
                                     </h2>
                                     <ProjectList />
                                 </div>
-                                <FeedbackForm />
+                                <div id="contact">
+                                    <FeedbackForm />
+                                </div>
                             </>
                         } />
                         <Route path="/projects" element={
@@ -33,7 +35,9 @@ function App() {
                                     </h2>
                                     <ProjectList />
                                 </div>
-                                <FeedbackForm />
+                                <div id="contact">
+                                    <FeedbackForm />
+                                </div>
                             </>
                         } />
                     </Routes>
