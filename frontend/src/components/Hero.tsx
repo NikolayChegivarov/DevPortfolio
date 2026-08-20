@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigation } from '../hooks/useNavigation';
 
 const Hero: React.FC = () => {
+    const { goToProjects, goToContact } = useNavigation();
+
     return (
         <section className="min-h-[90vh] flex items-center bg-gradient-to-br from-gray-50 to-white">
             <div className="max-w-6xl mx-auto px-4 py-20">
@@ -20,18 +22,18 @@ const Hero: React.FC = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-4">
-                        <Link
-                            to="/projects"
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors shadow-lg hover:shadow-xl"
+                        <button
+                            onClick={goToProjects}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors shadow-lg hover:shadow-xl cursor-pointer"
                         >
                             Посмотреть проекты
-                        </Link>
-                        <a
-                            href="#contact"
-                            className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-lg text-lg font-medium transition-colors"
+                        </button>
+                        <button
+                            onClick={goToContact}
+                            className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-lg text-lg font-medium transition-colors cursor-pointer"
                         >
                             Обсудить проект
-                        </a>
+                        </button>
                     </div>
 
                     <div className="mt-12 flex items-center gap-6 text-sm text-gray-500">
