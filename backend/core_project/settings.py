@@ -8,9 +8,25 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # --- Безопасность ---
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-temporary-key-for-dev')
-DEBUG = True  # В продакшене ставить False!
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = False    # В продакшене ставить False!
+
+
+# --- БЕЗОПАСНОСТЬ (HTTPS) ---
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = 31536000  # 1 год
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
+
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '192.168.1.65',
+    'gusarov-dev.duckdns.org',
+]
 
 # --- Установленные приложения ---
 INSTALLED_APPS = [
@@ -47,7 +63,7 @@ ROOT_URLCONF = 'core_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # Можно указать папку для своих шаблонов
+        'DIRS': [os.path.join(BASE_DIR, 'core_project', 'templates')],  # Добавляю папку шаблонов
         'APP_DIRS': True,  # Django будет искать шаблоны в папках templates каждого приложения
         'OPTIONS': {
             'context_processors': [
@@ -62,7 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core_project.wsgi.application'
 
-# --- НАСТРОЙКА БАЗЫ ДАННЫХ (ПОДКЛЮЧАЕМ POSTGRESQL) ---
+# --- БАЗА ДАННЫХ ---
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -88,9 +104,20 @@ TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_TZ = True
 
-# --- Статические файлы ---
-STATIC_URL = 'static/'
+# --- СТАТИЧЕСКИЕ ФАЙЛЫ ---
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Для сбора статики в продакшене
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Папка static в корне проекта
+    os.path.join(BASE_DIR, '../frontend/dist'),   # Путь к React
+]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Для продакшена добавляем путь к React
+if not DEBUG:
+    STATICFILES_DIRS.append(os.path.join(BASE_DIR, 'static'))
+
 
 # --- Настройки CORS (для React) ---
 CORS_ALLOWED_ORIGINS = [
@@ -98,9 +125,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://localhost:3000",  # Если используете Create React App
     "http://127.0.0.1:3000",
+    "https://gusarov-dev.duckdns.org",  # ← ОБЯЗАТЕЛЬНО (https!)
+    "http://gusarov-dev.duckdns.org",
 ]
-# Для разработки можно разрешить все (НО НЕ ДЛЯ ПРОДАКШЕНА!)
-# CORS_ALLOW_ALL_ORIGINS = True
 
 # --- DRF настройки ---
 REST_FRAMEWORK = {

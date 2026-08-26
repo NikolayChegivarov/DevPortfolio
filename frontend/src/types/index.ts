@@ -24,6 +24,4 @@ export interface FeedbackResponse {
     data: Feedback;
 }
 
-// Явный экспорт всех типов (на случай проблем с Vite)
-export type { Project, Feedback, FeedbackResponse };
-
+// Убираем дублирующий export type - он не нужен!

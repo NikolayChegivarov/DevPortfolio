@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Project } from '../types';
+import { motion } from 'framer-motion';
+import type { Project } from '../types';
 import { getProjects } from '../services/api';
+import { staggerContainer, scaleIn, scrollReveal } from '../utils/animations';
+
 
 const ProjectList: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -36,13 +39,26 @@ const ProjectList: React.FC = () => {
     }
 
     return (
-        <div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Мои проекты</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {projects.map((project) => (
-                    <div 
+        <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={scrollReveal}
+        >
+            <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+            >
+                {projects.map((project, index) => (
+                    <motion.div 
                         key={project.id} 
                         className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden border border-gray-100"
+                        variants={scaleIn}
+                        whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                        transition={{ delay: index * 0.1 }}
                     >
                         <div className="p-6">
                             <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -61,31 +77,35 @@ const ProjectList: React.FC = () => {
                             </div>
                             <div className="flex gap-3">
                                 {project.github_url && (
-                                    <a 
+                                    <motion.a 
                                         href={project.github_url} 
                                         target="_blank" 
                                         rel="noopener noreferrer"
                                         className="text-sm bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-md transition-colors"
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
                                     >
                                         GitHub
-                                    </a>
+                                    </motion.a>
                                 )}
                                 {project.demo_url && (
-                                    <a 
+                                    <motion.a 
                                         href={project.demo_url} 
                                         target="_blank" 
                                         rel="noopener noreferrer"
                                         className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
                                     >
                                         Демо
-                                    </a>
+                                    </motion.a>
                                 )}
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 };
 

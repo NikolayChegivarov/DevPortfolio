@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { staggerContainer, scaleIn, scrollReveal } from '../utils/animations';
 
 const TechStack: React.FC = () => {
     const technologies = [
@@ -13,28 +15,48 @@ const TechStack: React.FC = () => {
     ];
 
     return (
-        <section className="py-16 bg-white border-t border-gray-100">
+        <motion.section 
+            className="py-16 bg-white border-t border-gray-100"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={scrollReveal}
+        >
             <div className="max-w-6xl mx-auto px-4">
-                <h3 className="text-2xl font-semibold text-gray-800 text-center mb-2">
+                <motion.h3 
+                    className="text-2xl font-semibold text-gray-800 text-center mb-2"
+                    variants={scrollReveal}
+                >
                     Технологический стек
-                </h3>
-                <p className="text-gray-500 text-center mb-10">
+                </motion.h3>
+                <motion.p 
+                    className="text-gray-500 text-center mb-10"
+                    variants={scrollReveal}
+                >
                     Инструменты, с которыми я работаю ежедневно
-                </p>
+                </motion.p>
                 
-                <div className="flex flex-wrap justify-center gap-4">
+                <motion.div 
+                    className="flex flex-wrap justify-center gap-4"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                >
                     {technologies.map((tech) => (
-                        <div
+                        <motion.div
                             key={tech.name}
                             className={`${tech.color} px-6 py-3 rounded-full font-medium text-sm flex items-center gap-2 shadow-sm hover:shadow-md transition-shadow`}
+                            variants={scaleIn}
+                            whileHover={{ scale: 1.1, y: -2 }}
                         >
                             <span className="text-xl">{tech.icon}</span>
                             {tech.name}
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 
