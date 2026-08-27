@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # --- Безопасность ---
 SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = False    # В продакшене ставить False!
+DEBUG = True    # В продакшене ставить False!
 
 
 # --- БЕЗОПАСНОСТЬ (HTTPS) ---
@@ -19,6 +19,8 @@ DEBUG = False    # В продакшене ставить False!
 # SECURE_HSTS_SECONDS = 31536000  # 1 год
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_HSTS_PRELOAD = True
+
+
 
 
 ALLOWED_HOSTS = [
@@ -35,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    # 'whitenoise.runserver_nostatic',  # ДОБАВИТЬ ЭТУ СТРОКУ
     'django.contrib.staticfiles',
 
     # Сторонние приложения
@@ -47,8 +50,9 @@ INSTALLED_APPS = [
 
 # --- Промежуточные слои (Middleware) ---
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # ДОЛЖЕН быть самым первым
     'django.middleware.security.SecurityMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -56,6 +60,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# --- WhiteNoise для статики в продакшене ---
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'core_project.urls'
 
