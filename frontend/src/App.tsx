@@ -1,42 +1,24 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import TechStack from './components/TechStack';
 import ProjectList from './components/ProjectList';
 import FeedbackForm from './components/FeedbackForm';
 
-// Компонент для обработки якорей
-const ScrollToHash = () => {
-    const location = useLocation();
-
-    useEffect(() => {
-        if (location.hash === '#contact') {
-            setTimeout(() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            }, 300);
-        }
-    }, [location]);
-
-    return null;
-};
+// ПРИНУДИТЕЛЬНЫЙ ИМПОРТ, ЧТОБЫ VITE НЕ ВЫКИНУЛ
+import './services/api';
+console.log('🚀 API URL:', 'https://gusarov-dev.duckdns.org:8443/api');
 
 function App() {
     return (
         <BrowserRouter>
-            <ScrollToHash />
             <div className="min-h-screen bg-gray-50">
                 <Header />
                 <main>
                     <Routes>
                         <Route path="/" element={
                             <>
-                                <div id="home">
-                                    <Hero />
-                                </div>
+                                <Hero />
                                 <TechStack />
                                 <div className="max-w-6xl mx-auto px-4 py-8">
                                     <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
@@ -70,4 +52,3 @@ function App() {
 }
 
 export default App;
-

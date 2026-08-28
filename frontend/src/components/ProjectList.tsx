@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Project } from '../types';
-import { getProjects } from '../services/api';
 import { staggerContainer, scaleIn, scrollReveal } from '../utils/animations';
-
 
 const ProjectList: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -13,13 +11,21 @@ const ProjectList: React.FC = () => {
     useEffect(() => {
         const loadProjects = async () => {
             try {
-                const data = await getProjects();
+                const API_URL = 'https://gusarov-dev.duckdns.org:8443/api/projects/';
+                console.log('🚀 Запрос к API:', API_URL);
+                
+                const response = await fetch(API_URL);
+                if (!response.ok) {
+                    throw new Error(`Ошибка HTTP: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log('✅ Получены проекты:', data);
                 setProjects(data);
                 setLoading(false);
             } catch (err) {
+                console.error('❌ Ошибка загрузки:', err);
                 setError('Ошибка загрузки проектов');
                 setLoading(false);
-                console.error(err);
             }
         };
 

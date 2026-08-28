@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    # 'whitenoise.runserver_nostatic',  # ДОБАВИТЬ ЭТУ СТРОКУ
+    # 'whitenoise.runserver_nostatic',  # WhiteNoise
     'django.contrib.staticfiles',
 
     # Сторонние приложения
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 # --- Промежуточные слои (Middleware) ---
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -116,6 +116,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Для сбора статики в продакшене
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Папка static в корне проекта
+    os.path.join(BASE_DIR, 'static/assets'),
     os.path.join(BASE_DIR, '../frontend/dist'),   # Путь к React
 ]
 MEDIA_URL = '/media/'
