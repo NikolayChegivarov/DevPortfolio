@@ -7,6 +7,7 @@ from .views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api_apps.urls')),
+    path('', index, name='index'),
 ]
 
 # Статика и медиа должны быть ПЕРЕД catch-all
