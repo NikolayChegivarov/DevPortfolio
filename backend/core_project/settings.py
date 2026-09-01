@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # --- Безопасность ---
 SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = True    # В продакшене ставить False!
+DEBUG = False    # В продакшене ставить False!
 
 
 # --- БЕЗОПАСНОСТЬ (HTTPS) ---
@@ -19,9 +19,6 @@ DEBUG = True    # В продакшене ставить False!
 # SECURE_HSTS_SECONDS = 31536000  # 1 год
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_HSTS_PRELOAD = True
-
-
-
 
 ALLOWED_HOSTS = [
     'localhost',
