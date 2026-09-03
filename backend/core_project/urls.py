@@ -10,12 +10,12 @@ urlpatterns = [
     path('', index, name='index'),
 ]
 
-# Статика и медиа должны быть ПЕРЕД catch-all
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# Catch-all для React (ДОЛЖЕН БЫТЬ ПОСЛЕДНИМ!)
+# Catch-all для React Router (все остальные URL ведут на index)
 urlpatterns += [
-    re_path(r'^(?:.*)/?$', index, name='index'),
+    re_path(r'^(?!(admin|api|static|media)/).*$', index, name='index'),
 ]
+

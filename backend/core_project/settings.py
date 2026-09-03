@@ -11,20 +11,35 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = False    # В продакшене ставить False!
 
+# --- Безопасность CSRF и сессий ---
+CSRF_COOKIE_HTTPONLY = True       # Защита от XSS (важно!)
+CSRF_USE_SESSIONS = False          # Хранить CSRF-токен в куке, а не в сессии
+CSRF_COOKIE_SECURE = True          # Передавать куку только по HTTPS (включаем!)
+SESSION_COOKIE_SECURE = True       # Сессионная кука только по HTTPS
 
-# --- БЕЗОПАСНОСТЬ (HTTPS) ---
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
-# SECURE_SSL_REDIRECT = True
-# SECURE_HSTS_SECONDS = 31536000  # 1 год
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
+# --- Редиректы и HSTS ---
+SECURE_SSL_REDIRECT = False        # Django НЕ делает редирект (это делает NPM)
+SECURE_HSTS_SECONDS = 0            # Для отладки (потом можно включить)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
 
+# --- Доверие к прокси (NPM) ---
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://gusarov-dev.duckdns.org',
+    'https://gusarov-dev.duckdns.org:8443',  # Добавляем с портом!
+    'http://gusarov-dev.duckdns.org',
+    'http://gusarov-dev.duckdns.org:8443',  # И для HTTP тоже
+]
+
+# --- Доверенные хосты и origins ---
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '192.168.1.65',
     'gusarov-dev.duckdns.org',
+    'gusarov-dev.duckdns.org:8443',  # Добавляем с портом
 ]
 
 # --- Установленные приложения ---
