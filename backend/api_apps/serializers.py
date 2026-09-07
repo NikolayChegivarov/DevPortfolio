@@ -15,6 +15,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             'github_url', 
             'demo_url', 
             'image_url',
+            'image',
             'order',
             'created_at'
         ]

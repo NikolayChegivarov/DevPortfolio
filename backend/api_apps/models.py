@@ -14,8 +14,8 @@ class Project(models.Model):
     github_url = models.URLField(blank=True, null=True, verbose_name="Ссылка на GitHub")
     demo_url = models.URLField(blank=True, null=True, verbose_name="Ссылка на демо")
 
-    # Изображение (пока текстовое поле, позже добавим загрузку файлов)
     image_url = models.URLField(blank=True, null=True, verbose_name="URL изображения")
+    image = models.ImageField(upload_to='projects/', blank=True, null=True, verbose_name="Изображение")
 
     # Сортировка и статус
     order = models.PositiveIntegerField(default=0, verbose_name="Порядок отображения")

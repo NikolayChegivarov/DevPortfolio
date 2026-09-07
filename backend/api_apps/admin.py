@@ -16,7 +16,7 @@ class ProjectAdmin(admin.ModelAdmin):
             'fields': ('title', 'description', 'stack')
         }),
         ('Ссылки', {
-            'fields': ('github_url', 'demo_url', 'image_url')
+            'fields': ('image', 'github_url', 'demo_url', 'image_url')
         }),
         ('Настройки отображения', {
             'fields': ('order', 'is_active')

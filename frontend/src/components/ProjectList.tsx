@@ -13,7 +13,7 @@ const ProjectList: React.FC = () => {
             try {
                 const API_URL = 'https://gusarov-dev.duckdns.org:8443/api/projects/';
                 console.log('🚀 Запрос к API:', API_URL);
-                
+
                 const response = await fetch(API_URL);
                 if (!response.ok) {
                     throw new Error(`Ошибка HTTP: ${response.status}`);
@@ -51,7 +51,7 @@ const ProjectList: React.FC = () => {
             viewport={{ once: true, margin: "-50px" }}
             variants={scrollReveal}
         >
-            <motion.div 
+            <motion.div
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                 variants={staggerContainer}
                 initial="hidden"
@@ -59,14 +59,21 @@ const ProjectList: React.FC = () => {
                 viewport={{ once: true }}
             >
                 {projects.map((project, index) => (
-                    <motion.div 
-                        key={project.id} 
+                    <motion.div
+                        key={project.id}
                         className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden border border-gray-100"
                         variants={scaleIn}
                         whileHover={{ y: -5, transition: { duration: 0.2 } }}
                         transition={{ delay: index * 0.1 }}
                     >
                         <div className="p-6">
+                            {project.image && (
+                                <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="w-full h-48 object-cover rounded-md mb-4"
+                                />
+                            )}
                             <h3 className="text-xl font-semibold text-gray-900 mb-2">
                                 {project.title}
                             </h3>
@@ -83,9 +90,9 @@ const ProjectList: React.FC = () => {
                             </div>
                             <div className="flex gap-3">
                                 {project.github_url && (
-                                    <motion.a 
-                                        href={project.github_url} 
-                                        target="_blank" 
+                                    <motion.a
+                                        href={project.github_url}
+                                        target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-sm bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-md transition-colors"
                                         whileHover={{ scale: 1.05 }}
@@ -95,9 +102,9 @@ const ProjectList: React.FC = () => {
                                     </motion.a>
                                 )}
                                 {project.demo_url && (
-                                    <motion.a 
-                                        href={project.demo_url} 
-                                        target="_blank" 
+                                    <motion.a
+                                        href={project.demo_url}
+                                        target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
                                         whileHover={{ scale: 1.05 }}

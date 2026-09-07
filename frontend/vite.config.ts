@@ -18,10 +18,11 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       output: {
-        entryFileNames: `assets/[name].[hash].${Date.now()}.js`,
-        chunkFileNames: `assets/[name].[hash].${Date.now()}.js`,
-        assetFileNames: `assets/[name].[hash].${Date.now()}.[ext]`,
+        entryFileNames: `assets/index.js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `assets/[name].[ext]`,
       },
     },
   },
 })
+

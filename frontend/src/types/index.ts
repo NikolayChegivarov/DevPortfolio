@@ -7,6 +7,7 @@ export interface Project {
     github_url: string | null;
     demo_url: string | null;
     image_url: string | null;
+    image: string | null;
     created_at: string;
 }
 
