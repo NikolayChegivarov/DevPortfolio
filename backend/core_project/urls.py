@@ -3,6 +3,7 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import index
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -17,4 +18,9 @@ if settings.DEBUG:
 # Catch-all для React Router (все остальные URL → index)
 urlpatterns += [
     re_path(r'^(?!admin|api|static|media).*$', index, name='index'),
+]
+
+# Отдаём медиа-файлы через Django (для продакшена, если Nginx не настроен)
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
