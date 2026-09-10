@@ -149,6 +149,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://gusarov-dev.duckdns.org",
 ]
 
+# --- Доверие к прокси-заголовкам (NPM) ---
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # --- DRF настройки ---
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
