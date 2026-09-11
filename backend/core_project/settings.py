@@ -23,9 +23,6 @@ SECURE_HSTS_SECONDS = 0            # Для отладки (потом можн�
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_HSTS_PRELOAD = False
 
-# --- Доверие к прокси (NPM) ---
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 CSRF_TRUSTED_ORIGINS = [
     'https://gusarov-dev.duckdns.org',
     'https://gusarov-dev.duckdns.org:8443',  # Добавляем с портом!
@@ -149,8 +146,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://gusarov-dev.duckdns.org",
 ]
 
-# --- Доверие к прокси-заголовкам (NPM) ---
+# --- Порты для генерации URL ---
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
 # --- DRF настройки ---
 REST_FRAMEWORK = {
