@@ -21,8 +21,11 @@ class ProjectSerializer(serializers.ModelSerializer):
         # Если уже полный URL — возвращаем как есть
         if image_str.startswith('http'):
             return image_str
-        # Иначе строим полный URL с портом
-        return f'https://gusarov-dev.duckdns.org:8443/media/{image_str}'
+        # Строим полный URL через request (автоматически учитывает домен и протокол)
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri(f'/media/{image_str}')
+        return f'/media/{image_str}'
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
