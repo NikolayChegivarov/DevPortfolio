@@ -33,14 +33,14 @@ class ProjectAdmin(admin.ModelAdmin):
 class FeedbackAdmin(admin.ModelAdmin):
     """Настройка отображения сообщений в админке"""
 
-    list_display = ['name', 'email', 'status', 'created_at']
+    list_display = ['name', 'email', 'telegram', 'status', 'created_at']
     list_filter = ['status', 'created_at']
-    search_fields = ['name', 'email', 'message']
+    search_fields = ['name', 'email', 'telegram', 'message']
     list_editable = ['status']
     readonly_fields = ['created_at']
     fieldsets = (
         ('Контактные данные', {
-            'fields': ('name', 'email', 'phone')
+            'fields': ('name', 'email', 'phone', 'telegram')
         }),
         ('Сообщение', {
             'fields': ('message',)

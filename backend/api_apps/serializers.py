@@ -31,6 +31,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
-        fields = ['id', 'name', 'email', 'phone', 'message', 'created_at']
+        fields = ['id', 'name', 'email', 'phone', 'telegram', 'message', 'created_at']
         read_only_fields = ['id', 'created_at', 'status']
 

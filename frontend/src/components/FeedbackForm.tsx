@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { IMaskInput } from 'react-imask';
 import { sendFeedback } from '../services/api';
 import { scrollReveal, fadeInUp } from '../utils/animations';
 
@@ -8,6 +9,7 @@ const FeedbackForm: React.FC = () => {
         name: '',
         email: '',
         phone: '',
+        telegram: '',
         message: '',
     });
     const [status, setStatus] = useState<{
@@ -19,6 +21,13 @@ const FeedbackForm: React.FC = () => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
+        });
+    };
+
+    const handlePhoneChange = (value: string) => {
+        setFormData({
+            ...formData,
+            phone: value,
         });
     };
 
@@ -42,7 +51,7 @@ const FeedbackForm: React.FC = () => {
                     type: 'success',
                     message: 'Сообщение успешно отправлено! Я свяжусь с вами в ближайшее время.',
                 });
-                setFormData({ name: '', email: '', phone: '', message: '' });
+                setFormData({ name: '', email: '', phone: '', telegram: '', message: '' });
             }
         } catch (error) {
             setStatus({
@@ -84,69 +93,64 @@ const FeedbackForm: React.FC = () => {
                     viewport={{ once: true }}
                 >
                     <div className="mb-4">
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                            Имя <span className="text-red-500">*</span>
-                        </label>
-                        <motion.input
+                        <input
                             type="text"
                             id="name"
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="Ваше имя"
+                            placeholder="Ваше имя *"
                             required
-                            whileFocus={{ scale: 1.01 }}
                         />
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                            Email <span className="text-red-500">*</span>
-                        </label>
-                        <motion.input
+                        <input
                             type="email"
                             id="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="your@email.com"
+                            placeholder="your@email.com *"
                             required
-                            whileFocus={{ scale: 1.01 }}
                         />
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                            Телефон (опционально)
-                        </label>
-                        <motion.input
-                            type="tel"
-                            id="phone"
-                            name="phone"
+                        <IMaskInput
+                            mask="+7 (000) 000-00-00"
                             value={formData.phone}
+                            unmask={false}
+                            onAccept={handlePhoneChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="+7 (___) ___-__-__"
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <input
+                            type="text"
+                            id="telegram"
+                            name="telegram"
+                            value={formData.telegram}
                             onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="+7 999 123-45-67"
-                            whileFocus={{ scale: 1.01 }}
+                            placeholder="@username в Telegram"
                         />
                     </div>
 
                     <div className="mb-6">
-                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                            Сообщение <span className="text-red-500">*</span>
-                        </label>
-                        <motion.textarea
+                        <textarea
                             id="message"
                             name="message"
                             value={formData.message}
                             onChange={handleChange}
                             rows={5}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                            placeholder="Расскажите о вашем проекте..."
+                            placeholder="Расскажите о вашем проекте... *"
                             required
-                            whileFocus={{ scale: 1.01 }}
                         />
                     </div>
 
@@ -187,4 +191,3 @@ const FeedbackForm: React.FC = () => {
 };
 
 export default FeedbackForm;
-

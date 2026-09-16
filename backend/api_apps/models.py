@@ -41,6 +41,7 @@ class Feedback(models.Model):
     name = models.CharField(max_length=100, verbose_name="Имя")
     email = models.EmailField(verbose_name="Email")
     phone = models.CharField(max_length=20, blank=True, null=True, verbose_name="Телефон")
+    telegram = models.CharField(max_length=100, blank=True, null=True, verbose_name="Telegram")
 
     # Сообщение
     message = models.TextField(verbose_name="Сообщение")
